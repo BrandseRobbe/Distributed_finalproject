@@ -2,6 +2,8 @@ package Nameserver.api;
 
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public class FileObj {
     private String ipAdress;
     private List<String> filePaths;
@@ -14,9 +16,14 @@ public class FileObj {
         this.filePaths = filePaths;
     }
 
-    public void HashFile(){
+    public int HashFile(String toHash){
 //        stuff for seppe
-        return;
+        long max = 2147483647;
+        long min =  -2147483648;
+        long A = toHash.hashCode();
+        A += (max + 1) ;
+        long B = max+ abs(min) + 1;
+        return (int) (A*32768/B);
     }
 
     public String getIpAdress() {
