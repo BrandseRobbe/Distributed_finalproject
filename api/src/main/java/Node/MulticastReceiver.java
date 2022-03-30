@@ -35,8 +35,9 @@ public class MulticastReceiver extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String received = new String(
-                    packet.getData(), 0, packet.getLength());
+            packet.getAddress();
+            String received = new String(String.valueOf(packet.getAddress()));
+
             if ("end".equals(received)) {
                 break;
             }
@@ -45,5 +46,10 @@ public class MulticastReceiver extends Thread {
         }
       //  socket.leaveGroup(group);
       //  socket.close();
+    }
+
+    public static void main(String[] args) {
+        MulticastReceiver multicastReceiver = new MulticastReceiver();
+        multicastReceiver.run();
     }
 }

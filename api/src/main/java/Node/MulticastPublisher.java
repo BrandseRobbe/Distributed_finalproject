@@ -26,4 +26,10 @@ public class MulticastPublisher {
         socket.send(packet);
         socket.close();
     }
+
+    public static void main(String[] args) throws IOException {
+        MulticastPublisher multicastPublisher = new MulticastPublisher();
+        multicastPublisher.multicast("lala");
+
+    }
 }
