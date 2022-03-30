@@ -35,10 +35,11 @@ public class Mappings {
         return (int) (A * 32768 / B);
     }
 
-    public void addFile() {
+    public void addIp(String ip) {
+        ipMap.put(HashFile(ip), ip);
     }
-
-    public void removeFile() {
+    public void removeIp(String ip) {
+        ipMap.remove(HashFile(ip));
     }
 
     private void saveHashMap() {
