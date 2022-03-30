@@ -1,38 +1,22 @@
 package Nameserver.api;
 
+import java.util.List;
+
 public class FileObj {
-    private String fileName;
-    private String hashval;
     private String ipAdress;
+    private List<String> filePaths;
 
     public FileObj() {
     }
 
-    public FileObj(String fileName, String hashval, String ipAdress) {
-        this.fileName = fileName;
-        this.hashval = hashval;
+    public FileObj(List<String> filePaths,String ipAdress) {
         this.ipAdress = ipAdress;
+        this.filePaths = filePaths;
     }
 
     public void HashFile(){
 //        stuff for seppe
         return;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getHashval() {
-        return hashval;
-    }
-
-    public void setHashval(String hashval) {
-        this.hashval = hashval;
     }
 
     public String getIpAdress() {
@@ -41,5 +25,13 @@ public class FileObj {
 
     public void setIpAdress(String ipAdress) {
         this.ipAdress = ipAdress;
+    }
+
+    public List<String> getFilePaths() {
+        return filePaths;
+    }
+
+    public void setFilePaths(List<String> filePaths) {
+        this.filePaths = filePaths;
     }
 }
