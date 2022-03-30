@@ -31,9 +31,9 @@ public class FileController {
 
     @GetMapping("/JoinNetwork")
     @ResponseStatus(code = HttpStatus.OK, reason = "OK")
-
     public ResponseEntity JoinNetwork(HttpServletRequest request){
         String ip = requestService.getClientIp(request);
+        mappings.addIp(ip);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
