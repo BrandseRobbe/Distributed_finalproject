@@ -23,4 +23,15 @@ public class FileController {
     public List<FileObj> getAccounts(){
         return datastore.getFiles();
     }
+
+    @PutMapping("/UpdateServerFiles")
+    public List<FileObj> updateServerFiles(){
+        return datastore.getFiles();
+    }
+
+    @GetMapping("/GetFileIp/{filename}")
+    public String getfileIp(@RequestHeader(name="fileName", value="")String fileName){
+        return datastore.getFileIp(fileName);
+    }
+
 }
