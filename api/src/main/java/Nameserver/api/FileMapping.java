@@ -22,6 +22,10 @@ public class FileMapping {
     public List<FileObj> getFiles() {
         return new ArrayList<>(fileMap.values());
     }
+    
+    public String getFileIp(String filePath) {
+        return fileMap.values().stream().filter(e -> e.getFilePaths().contains(filePath)).findFirst().orElse(null).getIpAdress();
+    }
 
     public void addFile() {}
 
