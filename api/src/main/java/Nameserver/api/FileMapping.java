@@ -1,5 +1,7 @@
 package Nameserver.api;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -31,7 +33,19 @@ public class FileMapping {
         try {
             String json = mapper.writeValueAsString(hashMap);
 
-            // Save the JSON to a file
+            // Create the JSON-file
+            File saveFile = new File("data.json");
+            if (saveFile.createNewFile()) {
+                System.out.println("File created: " + saveFile.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+
+            // Write to the JSON file
+            FileWriter writer = new FileWriter("data.json");
+            writer.write(json);
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
         }
         catch (JsonGenerationException e) {
             e.printStackTrace();
