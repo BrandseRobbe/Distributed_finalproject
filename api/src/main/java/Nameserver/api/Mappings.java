@@ -6,33 +6,35 @@ import java.io.IOException;
 import java.util.*;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class FileMapping {
-    // Map of names to Person instances.
-    // Private Map<String, User> idMap = new HashMap<>();
-    private Map<Integer, FileObj> fileMap = new HashMap<>();
+import static java.lang.Math.abs;
 
-    //private constructor so people know to use the getInstance() function instead
-    FileMapping() {
-//        List<String> filePaths = new ArrayList<String>();
-//        filePaths.add("putput_saves_the_zoo");
-//
-//        FileObj test = new FileObj("1240.2039", filePaths);
-//        fileMap.put(97432, test);
+public class Mappings {
+    private Map<Integer, String> fileMap = new HashMap<>();
+    private Map<Integer, String> ipMap = new HashMap<>();
 
-//        saveHashMap();
-        loadHashMap("data.json");
-    }
+    Mappings() {}
 
-    public List<FileObj> getFiles() {
-        return new ArrayList<>(fileMap.values());
+    public List<String> getFiles() {
+        return new ArrayList<String>(fileMap.values());
     }
     
     public String getFileIp(String filePath) {
-        return fileMap.values().stream().filter(e -> e.getFilePaths().contains(filePath)).findFirst().orElse(null).getIpAdress();
+        int fileHash = HashFile(filePath);
+        int requiredIpHash = ipMap.keySet().stream().map(s -> abs(s - fileHash)).min(Integer::compare).get();
+        return fileMap.get(requiredIpHash);
+    }
+
+    public static int HashFile(String toHash){
+//        stuff for seppe
+        long max = 2147483647;
+        long min =  -2147483648;
+        long A = toHash.hashCode();
+        A += (max + 1) ;
+        long B = max+ abs(min) + 1;
+        return (int) (A*32768/B);
     }
 
     public void addFile() {}

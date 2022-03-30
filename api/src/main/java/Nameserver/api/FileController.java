@@ -17,21 +17,21 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class FileController {
 
     private final AtomicLong counter = new AtomicLong();
-    private FileMapping datastore = new FileMapping();
+    private Mappings mappings = new Mappings();
 
     @GetMapping("/GetFiles")
-    public List<FileObj> getAccounts(){
-        return datastore.getFiles();
+    public List<String> getAccounts(){
+        return mappings.getFiles();
     }
 
     @PutMapping("/UpdateServerFiles")
-    public List<FileObj> updateServerFiles(){
-        return datastore.getFiles();
+    @ResponseStatus(code = HttpStatus.OK, reason = "OK")
+    public ResponseEntity updateServerFiles(){
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/GetFileIp/{filename}")
-//    @ResponseStatus(code = HttpStatus.OK, reason = "OK")
     public String getfileIp(@PathVariable("filename") String fileName){
-        return datastore.getFileIp(fileName);
+        return mappings.getFileIp(fileName);
     }
 }
