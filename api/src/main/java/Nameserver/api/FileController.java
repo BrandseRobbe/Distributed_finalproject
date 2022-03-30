@@ -17,7 +17,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class FileController {
 
     private final AtomicLong counter = new AtomicLong();
+<<<<<<< HEAD
     private Mappings mappings = new Mappings();
+=======
+    private final FileMapping datastore = new FileMapping();
+>>>>>>> 50487c91a6c2c1708702a73d5e9b09326fbd93b1
 
     @GetMapping("/GetFiles")
     public List<String> getAccounts(){
