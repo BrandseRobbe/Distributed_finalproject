@@ -9,7 +9,7 @@ public class FileObj {
     public FileObj() {
     }
 
-    public FileObj(List<String> filePaths,String ipAdress) {
+    public FileObj(String ipAdress, List<String> filePaths) {
         this.ipAdress = ipAdress;
         this.filePaths = filePaths;
     }

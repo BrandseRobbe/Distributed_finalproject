@@ -17,6 +17,14 @@ public class FileMapping {
 
     //private constructor so people know to use the getInstance() function instead
     FileMapping() {
+//        List<String> filePaths = new ArrayList<String>();
+//        filePaths.add("putput_saves_the_zoo");
+//
+//        FileObj test = new FileObj("1240.2039", filePaths);
+//        fileMap.put(97432, test);
+
+//        saveHashMap();
+        loadHashMap("data.json");
     }
 
     public List<FileObj> getFiles() {
@@ -31,11 +39,11 @@ public class FileMapping {
 
     public void removeFile() {}
 
-    public void saveHashMap(HashMap<Integer, FileObj> hashMap) {
+    private void saveHashMap() {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            String json = mapper.writeValueAsString(hashMap);
+            String json = mapper.writeValueAsString(fileMap);
 
             // Create the JSON-file
             File saveFile = new File("data.json");
@@ -62,13 +70,10 @@ public class FileMapping {
         }
     }
 
-    public HashMap<Integer, FileObj> loadHashMap(String json) {
+    private void loadHashMap(String json) {
         ObjectMapper mapper = new ObjectMapper();
-
         try {
-            HashMap<Integer, FileObj> hashMap = mapper.readValue(json, HashMap.class);
-
-            return hashMap;
+            this.fileMap = mapper.readValue(json, HashMap.class);
         }
         catch (JsonGenerationException e) {
             e.printStackTrace();
@@ -80,5 +85,4 @@ public class FileMapping {
             e.printStackTrace();
         }
     }
-
 }

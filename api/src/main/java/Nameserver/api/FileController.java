@@ -30,8 +30,8 @@ public class FileController {
     }
 
     @GetMapping("/GetFileIp/{filename}")
-    public String getfileIp(@RequestHeader(name="fileName", value="")String fileName){
+//    @ResponseStatus(code = HttpStatus.OK, reason = "OK")
+    public String getfileIp(@PathVariable("filename") String fileName){
         return datastore.getFileIp(fileName);
     }
-
 }
