@@ -17,12 +17,23 @@ public class Mappings {
     private Map<Integer, String> ipMap = new HashMap<>();
 
     Mappings() {
+        ipMap.put(100, "testipadress");
     }
 
     public String getFileIp(String filePath) {
         int fileHash = HashFile(filePath);
-        int requiredIpHash = ipMap.keySet().stream().map(s -> abs(s - fileHash)).min(Integer::compare).get();
-        return ipMap.get(requiredIpHash);
+//        int requiredIpHash = ipMap.keySet().stream().map(s -> abs(s - fileHash)).min(Integer::compare).get();
+        int min_diff = 32768;
+        String ip = "";
+        int diff;
+        for (int key : ipMap.keySet()){
+            diff = abs(key - fileHash);
+            if (diff < min_diff){
+                min_diff = diff;
+                ip = ipMap.get(key);
+            }
+        }
+        return ip;
     }
 
     public static int HashFile(String toHash) {
@@ -40,6 +51,10 @@ public class Mappings {
     }
     public void removeIp(String ip) {
         ipMap.remove(HashFile(ip));
+    }
+
+    public boolean ipCheck(String ip){
+        return ipMap.containsKey(HashFile(ip));
     }
 
     private void saveHashMap() {

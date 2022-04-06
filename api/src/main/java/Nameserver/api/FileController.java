@@ -30,11 +30,24 @@ public class FileController {
     }
 
     @GetMapping("/JoinNetwork")
-    @ResponseStatus(code = HttpStatus.OK, reason = "OK")
+//    @ResponseStatus(code = HttpStatus.OK, reason = "OK")
     public ResponseEntity JoinNetwork(HttpServletRequest request){
-        String ip = requestService.getClientIp(request);
+        String ip = request.getRemoteAddr();
+        System.out.println(ip + " has joined the network");
         mappings.addIp(ip);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Successfully joined the network", HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/ExitNetwork")
+    public ResponseEntity ExitNetwork(HttpServletRequest request){
+        String ip = request.getRemoteAddr();
+        if (mappings.ipCheck(ip)){
+            System.out.println(ip + " has quit the network");
+            mappings.removeIp(ip);
+            return new ResponseEntity<>("Successfully exited the network", HttpStatus.ACCEPTED);
+        }
+        System.out.println(ip + " is not in the network");
+        return new ResponseEntity<>("Found nothing to remove", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/GetFileIp/{filename}")
