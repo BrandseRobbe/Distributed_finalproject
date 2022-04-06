@@ -25,7 +25,7 @@ public final class HttpUtils {
     }
 
     public static String getRequestIP(HttpServletRequest request) {
-        for (String header: IP_HEADERS)
+        for (String header: IP_HEADERS) {
             String value = request.getHeader(header);
         if (value == null || value.isEmpty()) {
             continue;
@@ -34,5 +34,4 @@ public final class HttpUtils {
         return parts[0];
     }
         return request.getRemoteAddr();
-}
-}
+}}
