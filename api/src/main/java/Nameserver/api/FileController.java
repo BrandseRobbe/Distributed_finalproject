@@ -1,25 +1,19 @@
 package Nameserver.api;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("/FileService")
 public class FileController {
 
     private final AtomicLong counter = new AtomicLong();
-    private Mappings mappings = new Mappings();
+    private NamingServer namingServer = NamingServer.getInstance();
     private RequestService requestService;
 
 
@@ -34,16 +28,16 @@ public class FileController {
     public ResponseEntity JoinNetwork(HttpServletRequest request){
         String ip = request.getRemoteAddr();
         System.out.println(ip + " has joined the network");
-        mappings.addIp(ip);
+        namingServer.addIp(ip);
         return new ResponseEntity<>("Successfully joined the network", HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/ExitNetwork")
     public ResponseEntity ExitNetwork(HttpServletRequest request){
         String ip = request.getRemoteAddr();
-        if (mappings.ipCheck(ip)){
+        if (namingServer.ipCheck(ip)){
             System.out.println(ip + " has quit the network");
-            mappings.removeIp(ip);
+            namingServer.removeIp(ip);
             return new ResponseEntity<>("Successfully exited the network", HttpStatus.ACCEPTED);
         }
         System.out.println(ip + " is not in the network");
@@ -52,6 +46,6 @@ public class FileController {
 
     @GetMapping("/GetFileIp/{filename}")
     public String GetfileIp(@PathVariable("filename") String fileName){
-        return mappings.getFileIp(fileName);
+        return namingServer.getFileIp(fileName);
     }
 }
