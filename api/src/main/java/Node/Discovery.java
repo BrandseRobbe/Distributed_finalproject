@@ -2,7 +2,7 @@ package Node;
 
 import java.io.IOException;
 
-public class Bootstrap {
+public class Discovery {
     public static void main(String[] args) throws IOException {
         MulticastPublisher multicastPublisher = new MulticastPublisher();
         MulticastReceiver multicastReceiver = new MulticastReceiver();
