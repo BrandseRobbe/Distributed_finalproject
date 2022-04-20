@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import Utilities.Functions;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -34,18 +35,8 @@ public class NamingServer {
     }
 
     /* METHODS */
-
-    public static int HashFile(String toHash) {
-        long max = 2147483647;
-        long min = -2147483648;
-        long A = toHash.hashCode();
-        A += (max + 1);
-        long B = max + abs(min) + 1;
-        return (int) (A * 32768 / B);
-    }
-
     public String getFileIp(String filePath) {
-        int fileHash = HashFile(filePath);
+        int fileHash = Functions.hashFunction((filePath));
         // int requiredIpHash = ipMap.keySet().stream().map(s -> abs(s - fileHash)).min(Integer::compare).get();
         int min_diff = 32768;
         String ip = "";
@@ -61,15 +52,15 @@ public class NamingServer {
     }
 
     public void addIp(String ip) {
-        ipMap.put(HashFile(ip), ip);
+        ipMap.put(Functions.hashFunction(ip), ip);
     }
 
     public void removeIp(String ip) {
-        ipMap.remove(HashFile(ip));
+        ipMap.remove(Functions.hashFunction((ip)));
     }
 
     public boolean ipCheck(String ip){
-        return ipMap.containsKey(HashFile(ip));
+        return ipMap.containsKey(Functions.hashFunction((ip)));
     }
 
     private void saveHashMap() {

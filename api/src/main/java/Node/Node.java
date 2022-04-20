@@ -5,25 +5,26 @@ public class Node {
     private String next_node;
     private String nodename;
 
-    public void Run(){
-        while (true){
+    public void Run() {
+        while (true) {
 
         }
     }
 
-    public void Discovery(){
+    public void Discovery() {
         // nodes ophalen van api
     }
 
-    public void Bootstrap(){
+    public void Bootstrap() {
         // local parameters initialiseren met nodedata
     }
-    public void Shutdown(){
+
+    public void Shutdown() {
         // ExitNetwork endpoint op api oproepen
         // previous en next node inlichten
     }
-    public void Failure(){
+
+    public void Failure() {
 
     }
-
 }
