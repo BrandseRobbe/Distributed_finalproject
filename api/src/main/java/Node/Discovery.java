@@ -2,8 +2,8 @@ package Node;
 
 import java.io.IOException;
 
-public class Bootstrap {
-    public static void main(String[] args) throws IOException {
+public class Discovery {
+    public static void Discover() throws IOException {
         MulticastPublisher multicastPublisher = new MulticastPublisher();
         MulticastReceiver multicastReceiver = new MulticastReceiver();
         multicastReceiver.run();
