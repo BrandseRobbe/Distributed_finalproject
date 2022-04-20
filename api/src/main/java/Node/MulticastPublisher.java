@@ -29,7 +29,7 @@ public class MulticastPublisher {
 
     public static void main(String[] args) throws IOException {
         MulticastPublisher multicastPublisher = new MulticastPublisher();
-        multicastPublisher.multicast("lala");
+        multicastPublisher.multicast("naamvanserver");
 
     }
 }

@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 
 public class MulticastReceiver extends Thread {
     protected MulticastSocket socket = null;
@@ -35,14 +36,15 @@ public class MulticastReceiver extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            packet.getAddress();
-            String received = new String(String.valueOf(packet.getAddress()));
+            String adress = String.valueOf(packet.getAddress());
+            String msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
 
-            if ("end".equals(received)) {
+            if ("end".equals(adress)) {
                 break;
             }
 
-            System.out.println("message received: " + received);
+            System.out.println("message address: " + adress);
+            System.out.println("message content: " + msg);
         }
       //  socket.leaveGroup(group);
       //  socket.close();
