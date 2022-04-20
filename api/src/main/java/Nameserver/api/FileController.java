@@ -19,25 +19,24 @@ public class FileController {
 
     @PutMapping("/UpdateServerFiles")
     @ResponseStatus(code = HttpStatus.OK, reason = "OK")
-    public ResponseEntity UpdateServerFiles(){
+    public ResponseEntity<String> updateServerFiles(){
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/JoinNetwork")
 //    @ResponseStatus(code = HttpStatus.OK, reason = "OK")
-    public ResponseEntity JoinNetwork(HttpServletRequest request){
+    public ResponseEntity<String> joinNetwork(HttpServletRequest request){
         String ip = request.getRemoteAddr();
         System.out.println(ip + " has joined the network");
         namingServer.addIp(ip);
         return new ResponseEntity<>("Successfully joined the network", HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/ExitNetwork")
-    public ResponseEntity ExitNetwork(HttpServletRequest request){
-        String ip = request.getRemoteAddr();
+    @GetMapping("/ExitNetwork/{ip}")
+    public ResponseEntity<String> exitNetworkByIP(@PathVariable("ip") String ip){
         if (namingServer.ipCheck(ip)){
-            System.out.println(ip + " has quit the network");
             namingServer.removeIp(ip);
+            System.out.println(ip + " has quit the network");
             return new ResponseEntity<>("Successfully exited the network", HttpStatus.ACCEPTED);
         }
         System.out.println(ip + " is not in the network");
@@ -45,7 +44,7 @@ public class FileController {
     }
 
     @GetMapping("/GetFileIp/{filename}")
-    public String GetfileIp(@PathVariable("filename") String fileName){
+    public String getfileIp(@PathVariable("filename") String fileName){
         return namingServer.getFileIp(fileName);
     }
 }
