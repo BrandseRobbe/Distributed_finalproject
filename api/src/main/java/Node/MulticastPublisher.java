@@ -10,6 +10,11 @@ public class MulticastPublisher {
     private DatagramSocket socket;
     private InetAddress group;
     private byte[] buf;
+    private String NameOfServer;
+
+    public MulticastPublisher(String nameOfServer) {
+        NameOfServer = nameOfServer;
+    }
 
     public void multicast(
             String multicastMessage) throws IOException {
@@ -27,9 +32,17 @@ public class MulticastPublisher {
         socket.close();
     }
 
+    /*
     public static void main(String[] args) throws IOException {
-        MulticastPublisher multicastPublisher = new MulticastPublisher();
+        MulticastPublisher multicastPublisher = new MulticastPublisher(nameOfServer);
         multicastPublisher.multicast("naamvanserver");
 
+    }
+*/
+
+    public void publishName () {
+      try {multicast(NameOfServer); } catch (IOException e) {
+          e.printStackTrace();
+      }
     }
 }

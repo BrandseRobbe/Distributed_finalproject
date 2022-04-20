@@ -1,5 +1,8 @@
 package Node;
 
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -7,10 +10,12 @@ import java.net.MulticastSocket;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 
-public class MulticastReceiver extends Thread {
+//@Service
+public class MulticastReceiver  {
     protected MulticastSocket socket = null;
     protected byte[] buf = new byte[256];
 
+    @Async
     public void run() {
         try {
             socket = new MulticastSocket(4446);
@@ -42,7 +47,6 @@ public class MulticastReceiver extends Thread {
             if ("end".equals(adress)) {
                 break;
             }
-
             System.out.println("message address: " + adress);
             System.out.println("message content: " + msg);
         }
@@ -50,8 +54,4 @@ public class MulticastReceiver extends Thread {
       //  socket.close();
     }
 
-    public static void main(String[] args) {
-        MulticastReceiver multicastReceiver = new MulticastReceiver();
-        multicastReceiver.run();
-    }
 }
