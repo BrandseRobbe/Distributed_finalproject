@@ -3,7 +3,7 @@ package Node;
 import Utilities.Multicast;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public class Node {
     private String previous_node;
     private String next_node;
@@ -24,9 +24,9 @@ public class Node {
 
     public void Discovery() {
         // nodes ophalen van api
-        multicast = new Multicast(nodename);
-        System.out.println("ervoor");
-        multicastReceiver.run();
+     //   multicast = new Multicast();
+      //  System.out.println("ervoor");
+        multicast.listenMulticast();
         System.out.println("erin");
         multicast.publishName();
         System.out.println("alallaa");

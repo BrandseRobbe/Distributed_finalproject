@@ -1,16 +1,14 @@
 package Node;
 
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Arrays;
 
-//@Service
+@Component
 public class MulticastReceiver  {
     protected MulticastSocket socket = null;
     protected byte[] buf = new byte[256];
