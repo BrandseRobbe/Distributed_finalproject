@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Distributed_finalproject.iml" filepath="$PROJECT_DIR$/.idea/Distributed_finalproject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Project.iml" filepath="$PROJECT_DIR$/.idea/Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NameServer/nameserver/nameserver.iml" filepath="$PROJECT_DIR$/NameServer/nameserver/nameserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Node/node/node.iml" filepath="$PROJECT_DIR$/Node/node/node.iml" />
     </modules>
   </component>
 </project>
